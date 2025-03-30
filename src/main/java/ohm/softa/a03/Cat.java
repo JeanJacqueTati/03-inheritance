@@ -9,10 +9,12 @@ public class Cat {
 	private static final Logger logger = LogManager.getLogger();
 
 	// valid states
-	public enum State {SLEEPING, HUNGRY, DIGESTING, PLAYFUL, DEAD}
+	//public enum State {SLEEPING, HUNGRY, DIGESTING, PLAYFUL, DEAD}
 
 	// initially, animals are sleeping
-	private State state = State.SLEEPING;
+	private State state = SleepingState;
+
+	private State currentState = ;
 
 	// state durations (set via constructor), ie. the number of ticks in each state
 	private final int sleep;
@@ -35,40 +37,42 @@ public class Cat {
 		logger.info("tick()");
 		time = time + 1;
 
-		switch (state) {
-			case SLEEPING:
-				if (time == sleep) {
-					logger.info("Yoan... getting hungry!");
-					state = HUNGRY;
-					time = 0;
-				}
-				break;
-			case HUNGRY:
-				if(time == awake){
-					logger.info("I've starved for a too long time...good bye...");
-					state = DEAD;
-				}
-				break;
-			case DIGESTING:
-				timeDigesting = timeDigesting + 1;
-				if (timeDigesting == digest) {
-					logger.info("Getting in a playful mood!");
-					state = PLAYFUL;
-				}
-				break;
-			case PLAYFUL:
-				if (time >= awake) {
-					logger.info("Yoan... getting tired!");
-					state = SLEEPING;
-					time = 0;
-				}
-				break;
 
-			case DEAD:
-				break;
-			default:
-				throw new IllegalStateException("Unknown cat state " + state.name());
-		}
+
+//		switch (state) {
+//			case SLEEPING:
+//				if (time == sleep) {
+//					logger.info("Yoan... getting hungry!");
+//					state = HUNGRY;
+//					time = 0;
+//				}
+//				break;
+//			case HUNGRY:
+//				if(time == awake){
+//					logger.info("I've starved for a too long time...good bye...");
+//					state = DEAD;
+//				}
+//				break;
+//			case DIGESTING:
+//				timeDigesting = timeDigesting + 1;
+//				if (timeDigesting == digest) {
+//					logger.info("Getting in a playful mood!");
+//					state = PLAYFUL;
+//				}
+//				break;
+//			case PLAYFUL:
+//				if (time >= awake) {
+//					logger.info("Yoan... getting tired!");
+//					state = SLEEPING;
+//					time = 0;
+//				}
+//				break;
+//
+//			case DEAD:
+//				break;
+//			default:
+//				throw new IllegalStateException("Unknown cat state " + state.name());
+//		}
 
 		logger.info(state.name());
 
@@ -110,6 +114,23 @@ public class Cat {
 
 	@Override
 	public String toString() {
+		return name;
+	}
+
+
+
+	public int getSleep() {
+		return sleep;
+	}
+	public int getDigest() {
+		return digest;
+	}
+
+	public int getAwake() {
+		return awake;
+	}
+
+	public String getName() {
 		return name;
 	}
 
